@@ -17,6 +17,7 @@
 #define WIDTH 79
 #include <locale.h>
 #include <Windows.h>
+#include <conio.h>
 #include <stdlib.h>
 #include <malloc.h>
 #include "Documentos.h"

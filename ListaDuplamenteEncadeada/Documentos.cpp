@@ -64,6 +64,27 @@ void printMenu() {
 	printf("%s", CHAR_JUNCAO);
 }
 
+char menuPrincipal() {
+	
+	printMenu();
+	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { 25, 1 });
+	printf("%s", "Menu Principal");
+	printSeparador(2, true);
+	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { 2, 3 }) && printf("%s", "1. Adicionar Documento");
+	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { 2, 4 }) && printf("%s", "2. Alterar Documento");
+	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { 2, 5 }) && printf("%s", "3. Mostrar Documento");
+	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { 2, 6 }) && printf("%s", "4. Deletar Documento");
+	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { 2, 7 }) && printf("%s", "5. Listar Documentos");
+	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { 2, 8 }) && printf("%s", "0. Sair");
+	while (!_kbhit())
+	{
+		continue;
+	}
+	char opcao = _getch();
+	return opcao;
+	
+
+}
 
 void adicionaDocumento(Documento *ultimo,Documento *doc) {
 	/* Cria um novo documento, e registra no fim da fila */
@@ -91,16 +112,32 @@ void adicionaDocumento(Documento *ultimo,Documento *doc) {
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { 26, 4 }) && scanf_s("%s", doc->data_reg, _countof(doc->data_reg));
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { 26, 5 }) && scanf_s("%s", doc->nome_resp, _countof(doc->nome_resp));
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { 26, 6 }) && scanf_s("%d", &doc->num_orig);
-	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { 26, 6 }) && scanf_s("%c", &doc->tipo_doc);
+	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { 26, 7 }) && scanf_s("%s", doc->tipo_doc, _countof(doc->tipo_doc));
 
 	/* Definições de ponteiros de localização na lista */
-	doc->id = (ultimo->id)++;
-	ultimo->proximo = doc;
-	doc->anterior = ultimo;
+	if (ultimo == NULL)
+	{
+		doc->id = 1;
+		doc->anterior = NULL;
+		
+	}
+	else
+	{
+		doc->id = (ultimo->id)+1;
+		ultimo->proximo = doc;
+		doc->anterior = ultimo;
+	}
+	doc->proximo = NULL; // Define como o último da lista ...
+	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { 2, HEIGHT-1 }) && printf("%s", "Documento adicionado");
+	while (! _kbhit())
+	{
+		continue;
+	}
 }
 
 void imprimeDocumento(Documento *) {
 	/* Print do Registro passado */
+
 }
 
 void alteraDocumento(Documento *) {
@@ -108,5 +145,9 @@ void alteraDocumento(Documento *) {
 }
 
 void deletaDocumento(Documento *) {
+
+}
+
+void listaDocumentos(Documento * primeiro) {
 
 }
