@@ -271,6 +271,7 @@ Documento * deletaDocumento(Documento *primeiro) {
 			}
 			else
 			{
+				/* Isso é um XGH muito grande, é possível que eu não arruma .. esteja avisado */
 				primeiro->id = -1;
 			}
 			
