@@ -153,15 +153,18 @@ void adicionaDocumento(Documento *primeiro,Documento *doc) {
 
 		doc->anterior = ultimo;
 		doc->proximo = NULL;
-		primeiro = doc;
+		ultimo->proximo = doc;
 	}
 	else
 	{
+		primeiro->id = 1;
 		strcpy_s(primeiro->nome_doc, doc->nome_doc);
 		strcpy_s(primeiro->data_reg, doc->data_reg);
 		strcpy_s(primeiro->nome_resp, doc->nome_resp);
 		primeiro->num_orig = doc->num_orig;
 		strcpy_s(primeiro->tipo_doc, doc->tipo_doc);
+		primeiro->proximo = NULL;
+		primeiro->anterior = NULL;
 	}
 	
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { 2, HEIGHT-1 }) && printf("%s", "Documento adicionado!");
@@ -224,6 +227,7 @@ void alteraDocumento(Documento * primeiro) {
 		strcpy_s(atual->nome_resp, novo->nome_resp);
 		atual->num_orig = novo->num_orig;
 		strcpy_s(atual->tipo_doc, novo->tipo_doc);
+
 	}
 	
 }
@@ -239,22 +243,30 @@ void deletaDocumento(Documento *primeiro) {
 			atual = atual->proximo;
 		}
 		
-		if (atual->proximo != NULL)
+		if (atual->id != primeiro->id)
 		{
-			Documento * tmp = atual->proximo;
-			tmp->anterior = atual->anterior;
+			if (atual->proximo != NULL)
+			{
+				Documento * tmp = atual->proximo;
+				tmp->anterior = atual->anterior;
 
+			}
+
+			if (atual->anterior != NULL)
+			{
+				Documento * tmp = atual->anterior;
+				tmp->proximo = atual->proximo;
+
+			}
+
+			free(atual);
 		}
 
-		if (atual->anterior != NULL)
-		{
-			Documento * tmp = atual->anterior;
-			tmp->proximo = atual->proximo;
-			
-		}
 		
-
-		free(atual);
+	}
+	else
+	{
+		//TODO: Tratar quando for exclusão do primeiro da lista
 	}
 }
 

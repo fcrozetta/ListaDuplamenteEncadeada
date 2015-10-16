@@ -9,7 +9,7 @@ int main()
 {
 	setlocale(LC_ALL, "");													// Inclui acentuação XD
 	Documento * primeiro = (Documento*) malloc(sizeof(Documento));			// Primeiro item da lista
-	Documento * ultimo = NULL;				// Último item da lista	
+	Documento * ultimo = (Documento*)malloc(sizeof(Documento));				// Último item da lista	
 
 	bool loop = true;
 	while (loop)
