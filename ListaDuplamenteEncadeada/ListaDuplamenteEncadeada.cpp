@@ -7,47 +7,46 @@
 
 int main()
 {
-	setlocale(LC_ALL, ""); // Inclui acentuação XD
-	Documento * primeiro = NULL;	// Primeiro item da lista
-	Documento * ultimo = NULL;		// Último item da lista	
-	
-	
+	setlocale(LC_ALL, "");													// Inclui acentuação XD
+	Documento * primeiro = (Documento*) malloc(sizeof(Documento));			// Primeiro item da lista
+	Documento * ultimo = NULL;				// Último item da lista	
+
 	bool loop = true;
 	while (loop)
 	{
-		Documento * novoDoc = NULL;
-		if (primeiro = NULL) {
-			primeiro = novoDoc;
-		}
-		
+		Documento * novoDoc;
 		switch (menuPrincipal())
 		{
-		case '1':
-			adicionaDocumento(ultimo, novoDoc);
+		case '1': // Novo Documento
+			novoDoc = novoDocumento();
+			adicionaDocumento(primeiro, novoDoc);
 			break;
 
-		case '2':
-			/* Alterar Documento */
+		case '2': // Alterar Documento
+			alteraDocumento(primeiro);
 			break;
 
-		case '3':
-			/* Mostrar Documento */
+		case '3': // Mostrar Documento
+			imprimeDocumento(primeiro);
 			break;
 
-		case '4':
-			/* Deletar Documento */
+		case '4': // Deleta Documento
+			deletaDocumento(primeiro);
 			break;
 
-		case '5':
-			/* Listar Documentos */
+		case '5': // Listar Documentos
+			listaDocumentos(primeiro);
+			while (!_kbhit())
+			{
+				continue;
+			}
 			break;
 
-		case '0':
+		case '0': // Sair
 			loop = false;
 			break;
 
-		default:
-			printf("opcao inválida!");
+		default: // Default. Porque sempre tem um FDP pra teclar uma opção inválida...
 			break;
 		}
 	}

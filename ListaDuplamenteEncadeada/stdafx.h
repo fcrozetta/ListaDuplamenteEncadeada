@@ -12,7 +12,6 @@
 
 
 
-// TODO: reference additional headers your program requires here
 #define HEIGHT 23	
 #define WIDTH 79
 #include <locale.h>
