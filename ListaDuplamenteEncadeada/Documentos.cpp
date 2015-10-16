@@ -232,7 +232,7 @@ void alteraDocumento(Documento * primeiro) {
 	
 }
 
-void deletaDocumento(Documento *primeiro) {
+Documento * deletaDocumento(Documento *primeiro) {
 	/* Deleta o documento */
 	int opcaoId = escolhaDocumento(primeiro);
 	if (existeDoumento(opcaoId,primeiro))
@@ -261,13 +261,25 @@ void deletaDocumento(Documento *primeiro) {
 
 			free(atual);
 		}
+		else
+		{
+			//TODO: Tratar quando for exclusão do primeiro da lista
+			if (primeiro->proximo != NULL)
+			{
+				primeiro = primeiro->proximo;
+				primeiro->anterior = NULL;
+			}
+			else
+			{
+				primeiro->id = -1;
+			}
+			
+		}
 
 		
 	}
-	else
-	{
-		//TODO: Tratar quando for exclusão do primeiro da lista
-	}
+
+	return primeiro;
 }
 
 void listaDocumentos(Documento * primeiro) {

@@ -31,6 +31,6 @@ void imprimeDocumento(Documento * primeiro);
 
 void alteraDocumento(Documento * primeiro);
 
-void deletaDocumento(Documento * primeiro);
+Documento * deletaDocumento(Documento * primeiro);
 
 void listaDocumentos(Documento * primeiro);

@@ -31,7 +31,7 @@ int main()
 			break;
 
 		case '4': // Deleta Documento
-			deletaDocumento(primeiro);
+			primeiro = deletaDocumento(primeiro);
 			break;
 
 		case '5': // Listar Documentos
